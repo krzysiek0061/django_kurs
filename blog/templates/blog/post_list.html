@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-    <html lang="pl">
-        <head>
-            <meta charset="UTF-8">
-            <title>Blog do nauki tworzenia stron www</title>
-        </head>
+{% extends 'blog/base.html' %}
 
-<body>
-    <div>
-        <h1>Witam na stronie bloga!</h1>
-        <h2>Strona utworzona podczas nauki htm, python, django</h2>
-        <h3>Autor: Krzysiek</h3>
-        <h4>Wszystkie prawa zastrzeżone</h4>
-    </div>
-    <div>
-        <p>To jest akapit</p>
-        <em>To jest wyróżniony tekst</em><br>
-        <strong>Tu jest pogrubiony tekst</strong><br>
-        <a href="https:\\www.sport.pl">SPORT</a>
-    </div>
-    <div>
-        <ul>
-            <li>Element listy</li>
-            <li>Element listy</li>
-            <li>Element listy</li>
-        </ul>
-    </div>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="data">
+                <p>opublikowany: {{post.publish_date }}</p>
+            </div>
 
-</body>
-</html>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}"> {{ post.title }} </a> </h2>
+            <em> {{ post.text|linebreaksbr }} </em>
+        </div>
+    {% endfor %}
+{% endblock %}
